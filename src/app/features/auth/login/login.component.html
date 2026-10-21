@@ -1,0 +1,45 @@
+<main class="login-container">
+  <mat-card class="login-card">
+    <div class="icone-login" aria-hidden="true">
+      <mat-icon>account_balance_wallet</mat-icon>
+    </div>
+
+    <mat-card-header>
+      <mat-card-title>Boas-vindas de volta</mat-card-title>
+      <mat-card-subtitle>Entre na sua conta para continuar.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" placeholder="seu@email.com" formControlName="email" autocomplete="email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="formulario.controls.email.hasError('required')">Informe seu e-mail.</mat-error>
+          <mat-error *ngIf="formulario.controls.email.hasError('email')">Informe um e-mail válido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua senha" formControlName="senha" autocomplete="current-password">
+          <button mat-icon-button matSuffix type="button" (click)="mostrarSenha = !mostrarSenha" [attr.aria-label]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
+            <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="formulario.controls.senha.hasError('required')">Informe sua senha.</mat-error>
+        </mat-form-field>
+
+        <p class="mensagem mensagem-erro" role="alert" *ngIf="erro">{{ erro }}</p>
+
+        <button mat-flat-button color="primary" type="submit" class="login-button" [disabled]="carregando">
+          {{ carregando ? 'Entrando...' : 'Entrar' }}
+        </button>
+      </form>
+
+      <p class="link-verificacao"><a routerLink="/verificar-email">Precisa verificar seu e-mail?</a></p>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <p>Ainda não tem uma conta? <a routerLink="/cadastro">Criar conta</a></p>
+    </mat-card-footer>
+  </mat-card>
+</main>

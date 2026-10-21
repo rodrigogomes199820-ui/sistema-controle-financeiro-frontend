@@ -1,0 +1,331 @@
+
+<mat-toolbar class="navbar">
+  <a class="brand" routerLink="/">
+    <mat-icon class="brand-icon">account_balance_wallet</mat-icon>
+
+    <span>
+      Rog<span class="brand-highlight">Fin</span>
+    </span>
+  </a>
+
+  <nav class="nav-links">
+    <a mat-button href="#inicio">Início</a>
+    <a mat-button href="#funcionalidades">Funcionalidades</a>
+    <a mat-button href="#como-funciona">Como funciona</a>
+    <a mat-button href="#sobre">Sobre</a>
+  </nav>
+
+  <div class="nav-actions">
+    <a mat-button routerLink="/login" class="login-button">
+      Entrar
+    </a>
+
+    <a
+      mat-flat-button
+      color="primary"
+      routerLink="/cadastro"
+      class="register-button">
+      Criar conta
+    </a>
+  </div>
+
+  <button
+    mat-icon-button
+    class="mobile-menu-button"
+    [matMenuTriggerFor]="mobileMenu"
+    aria-label="Abrir menu de navegação">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item href="#inicio">Início</a>
+    <a mat-menu-item href="#funcionalidades">Funcionalidades</a>
+    <a mat-menu-item href="#como-funciona">Como funciona</a>
+    <a mat-menu-item href="#sobre">Sobre</a>
+    <a mat-menu-item routerLink="/login">Entrar</a>
+    <a mat-menu-item routerLink="/cadastro">Criar conta</a>
+  </mat-menu>
+</mat-toolbar>
+
+<main>
+  <section class="container" id="inicio">
+    <div class="box-text">
+      <span class="subtitle">Finanças pessoais simples</span>
+
+      <h1>
+        Pare de se perguntar para onde foi seu dinheiro.
+      </h1>
+
+      <p>
+        Organize receitas e despesas em um painel claro e tome
+        decisões melhores, sem planilhas complicadas.
+      </p>
+
+      <div class="butao">
+        <a
+          mat-flat-button
+          color="primary"
+          routerLink="/cadastro">
+          Criar conta grátis
+        </a>
+
+        <a
+          mat-stroked-button
+          routerLink="/login">
+          Já tenho conta
+        </a>
+      </div>
+    </div>
+
+    <mat-card class="balance-card">
+      <mat-card-content>
+        <span class="balance-label">Saldo do mês</span>
+
+        <h2>R$ 2.480,00</h2>
+
+        <mat-divider></mat-divider>
+
+        <div class="infor">
+          <div class="balance-item">
+            <mat-icon class="income-icon">trending_up</mat-icon>
+
+            <div>
+              <span>Receitas</span>
+              <p>R$ 5.200,00</p>
+            </div>
+          </div>
+
+          <div class="balance-item">
+            <mat-icon class="expense-icon">trending_down</mat-icon>
+
+            <div>
+              <span>Despesas</span>
+              <p>R$ 2.720,00</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="funcionalidades" id="funcionalidades">
+    <div class="box-cont">
+      <span class="section-label">Funcionalidades</span>
+
+      <h1>
+        Tudo o que você precisa para organizar seu dinheiro.
+      </h1>
+
+      <p>
+        Tenha controle das suas finanças em um só lugar,
+        de forma simples e prática.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <mat-card class="feature-card">
+        <mat-card-content>
+          <div class="feature-icon">
+            <mat-icon>account_balance_wallet</mat-icon>
+          </div>
+
+          <h2>Controle de saldo</h2>
+
+          <p>
+            Acompanhe seu saldo e saiba exatamente quanto dinheiro
+            você tem disponível.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="feature-card">
+        <mat-card-content>
+          <div class="feature-icon">
+            <mat-icon>trending_up</mat-icon>
+          </div>
+
+          <h2>Controle de receitas</h2>
+
+          <p>
+            Registre seus ganhos e acompanhe a evolução
+            da sua vida financeira.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="feature-card">
+        <mat-card-content>
+          <div class="feature-icon">
+            <mat-icon>receipt_long</mat-icon>
+          </div>
+
+          <h2>Controle de despesas</h2>
+
+          <p>
+            Organize seus gastos e identifique para onde
+            seu dinheiro está indo.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="feature-card">
+        <mat-card-content>
+          <div class="feature-icon">
+            <mat-icon>bar_chart</mat-icon>
+          </div>
+
+          <h2>Relatórios financeiros</h2>
+
+          <p>
+            Visualize seus resultados e entenda melhor
+            seus hábitos de consumo.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <section class="explication" id="como-funciona">
+    <div class="explication-header">
+      <span class="section-label">Simples de usar</span>
+
+      <h1>Como funciona</h1>
+
+      <p>
+        Três passos para ter clareza sobre o seu dinheiro.
+      </p>
+    </div>
+
+    <div class="explication-grid">
+      <mat-card class="explication-card">
+        <mat-card-content>
+          <div class="step-number">1</div>
+
+          <mat-icon class="step-icon">person_add</mat-icon>
+
+          <h2>Crie sua conta</h2>
+
+          <p>
+            Leva menos de um minuto e é gratuito.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="explication-card">
+        <mat-card-content>
+          <div class="step-number">2</div>
+
+          <mat-icon class="step-icon">edit_note</mat-icon>
+
+          <h2>Registre suas finanças</h2>
+
+          <p>
+            Cadastre suas receitas e despesas para acompanhar
+            suas movimentações.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="explication-card">
+        <mat-card-content>
+          <div class="step-number">3</div>
+
+          <mat-icon class="step-icon">query_stats</mat-icon>
+
+          <h2>Acompanhe seus resultados</h2>
+
+          <p>
+            Visualize seu saldo e tome decisões melhores
+            para sua vida financeira.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <section class="recomend" id="sobre">
+    <div class="tex-recomend">
+      <span class="section-label">Comece agora</span>
+
+      <h1>Vale a pena começar hoje</h1>
+
+      <p>
+        Crie sua conta em um minuto e veja sua situação
+        financeira com clareza.
+      </p>
+    </div>
+
+    <div class="butao-criar">
+      <a
+        mat-flat-button
+        class="cta-button"
+        routerLink="/cadastro">
+        Criar conta grátis
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <a class="brand" routerLink="/">
+        <mat-icon class="brand-icon">
+          account_balance_wallet
+        </mat-icon>
+
+        <span>
+          Rog<span class="brand-highlight">Fin</span>
+        </span>
+      </a>
+
+      <p>
+        Simplifique suas finanças e tenha mais clareza
+        para tomar melhores decisões.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <h3>Navegação</h3>
+
+      <a href="#inicio">Início</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#sobre">Sobre</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>Conta</h3>
+
+      <a routerLink="/login">Entrar</a>
+      <a routerLink="/cadastro">Criar conta</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Organize seu dinheiro</h3>
+
+      <p>
+        Dê o primeiro passo para uma vida financeira
+        mais organizada.
+      </p>
+
+      <a
+        mat-flat-button
+        color="primary"
+        routerLink="/cadastro">
+        Começar agora
+      </a>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="footer-bottom">
+    <p>
+      © RogFin. Todos os direitos reservados.
+    </p>
+
+    <span>Feito para simplificar suas finanças.</span>
+  </div>
+</footer>

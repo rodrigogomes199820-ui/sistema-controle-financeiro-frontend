@@ -1,0 +1,18 @@
+﻿<mat-toolbar class="navbar">
+  <a class="brand" routerLink="/layout" aria-label="FinanceFlow - início">
+    <mat-icon class="brand-icon">account_balance_wallet</mat-icon>
+    <span>Finance<span class="brand-highlight">Flow</span></span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="authService.usuarioAtual$ | async as usuario">
+    <span class="user-greeting">Olá, {{ usuario.nome }}</span>
+  </ng-container>
+
+  <button mat-button type="button" class="logout-button" (click)="sair()">
+    <mat-icon>logout</mat-icon>
+    <span>Sair</span>
+  </button>
+</mat-toolbar>
+

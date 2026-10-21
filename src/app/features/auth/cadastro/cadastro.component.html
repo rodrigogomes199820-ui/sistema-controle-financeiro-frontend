@@ -1,0 +1,48 @@
+<div class="cadastro-container">
+  <mat-card class="cadastro-card">
+    <mat-card-header>
+      <mat-card-title>Criar conta</mat-card-title>
+      <mat-card-subtitle>Comece a organizar suas finan&ccedil;as</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="formulario" (ngSubmit)="cadastrar()" novalidate>
+        <mat-form-field appearance="outline">
+          <mat-label>Nome completo</mat-label>
+          <input matInput type="text" placeholder="Seu nome" formControlName="nome" autocomplete="name">
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="formulario.controls.nome.hasError('required')">Informe seu nome.</mat-error>
+          <mat-error *ngIf="formulario.controls.nome.hasError('minlength')">O nome deve ter pelo menos 2 caracteres.</mat-error>
+          <mat-error *ngIf="formulario.controls.nome.hasError('maxlength')">O nome deve ter no máximo 120 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" placeholder="seu@email.com" formControlName="email" autocomplete="email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="formulario.controls.email.hasError('required')">Informe seu e-mail.</mat-error>
+          <mat-error *ngIf="formulario.controls.email.hasError('email')">Informe um e-mail v&aacute;lido.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" placeholder="Digite sua senha" formControlName="senha" autocomplete="new-password">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="formulario.controls.senha.hasError('required')">Informe uma senha.</mat-error>
+          <mat-error *ngIf="formulario.controls.senha.hasError('minlength')">A senha deve ter pelo menos 8 caracteres.</mat-error>
+        </mat-form-field>
+
+        <p class="mensagem mensagem-sucesso" role="status" *ngIf="mensagem">{{ mensagem }}</p>
+        <p class="mensagem mensagem-erro" role="alert" *ngIf="erro">{{ erro }}</p>
+
+        <button mat-flat-button color="primary" type="submit" class="cadastro-button" [disabled]="carregando">
+          {{ carregando ? 'Criando conta...' : 'Criar minha conta' }}
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <p>J&aacute; possui uma conta? <a routerLink="/login">Entrar</a></p>
+    </mat-card-footer>
+  </mat-card>
+</div>
