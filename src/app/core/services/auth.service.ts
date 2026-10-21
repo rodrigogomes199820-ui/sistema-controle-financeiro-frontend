@@ -25,7 +25,7 @@ export interface VerificacaoEmailResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl =  'https://sistema-de-controle-financeiro-8xom.onrender.com/api/auth';
+  private readonly apiUrl =  'https://sistema-controle-financeiro-backend-dzg6.onrender.com/api/auth';
   private readonly usuarioAtualSubject = new BehaviorSubject<UsuarioAtual | null>(null);
   readonly usuarioAtual$ = this.usuarioAtualSubject.asObservable();
 
