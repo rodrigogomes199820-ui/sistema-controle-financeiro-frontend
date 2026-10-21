@@ -1,48 +1,64 @@
-<div class="cadastro-container">
-  <mat-card class="cadastro-card">
-    <mat-card-header>
-      <mat-card-title>Criar conta</mat-card-title>
-      <mat-card-subtitle>Comece a organizar suas finan&ccedil;as</mat-card-subtitle>
-    </mat-card-header>
+<main class="auth-page signup-page">
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a class="auth-brand" routerLink="/" aria-label="FinanceFlow - início">Rog<span>Fin</span></a>
+      <div class="auth-pitch">
+        <p class="auth-eyebrow">COMECE HOJE</p>
+        <h1>Mais clareza<br>para suas escolhas.</h1>
+        <p>Organize sua vida financeira e acompanhe cada passo com confiança.</p>
+      </div>
+      <img class="auth-illustration" src="assets/auth-wallet.svg" alt="">
+    </aside>
 
-    <mat-card-content>
-      <form [formGroup]="formulario" (ngSubmit)="cadastrar()" novalidate>
-        <mat-form-field appearance="outline">
-          <mat-label>Nome completo</mat-label>
-          <input matInput type="text" placeholder="Seu nome" formControlName="nome" autocomplete="name">
-          <mat-icon matSuffix>person</mat-icon>
-          <mat-error *ngIf="formulario.controls.nome.hasError('required')">Informe seu nome.</mat-error>
-          <mat-error *ngIf="formulario.controls.nome.hasError('minlength')">O nome deve ter pelo menos 2 caracteres.</mat-error>
-          <mat-error *ngIf="formulario.controls.nome.hasError('maxlength')">O nome deve ter no máximo 120 caracteres.</mat-error>
-        </mat-form-field>
+    <section class="auth-panel" aria-labelledby="signup-title">
+      <div class="auth-content">
+        <header class="auth-heading">
+          <h2 id="signup-title">Crie sua conta</h2>
+          <p>Comece a organizar suas finanças.</p>
+        </header>
 
-        <mat-form-field appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input matInput type="email" placeholder="seu@email.com" formControlName="email" autocomplete="email">
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="formulario.controls.email.hasError('required')">Informe seu e-mail.</mat-error>
-          <mat-error *ngIf="formulario.controls.email.hasError('email')">Informe um e-mail v&aacute;lido.</mat-error>
-        </mat-form-field>
+        <form class="auth-form" [formGroup]="formulario" (ngSubmit)="cadastrar()" novalidate>
+          <div class="auth-field">
+            <label for="signup-name">Nome completo</label>
+            <div class="auth-input-wrap" [class.invalid]="formulario.controls.nome.invalid && formulario.controls.nome.touched">
+              <mat-icon aria-hidden="true">person_outline</mat-icon>
+              <input id="signup-name" type="text" placeholder="Seu nome" formControlName="nome" autocomplete="name">
+            </div>
+            <p class="field-error" *ngIf="formulario.controls.nome.hasError('required') && formulario.controls.nome.touched">Informe seu nome.</p>
+            <p class="field-error" *ngIf="formulario.controls.nome.hasError('minlength') && formulario.controls.nome.touched">O nome deve ter pelo menos 2 caracteres.</p>
+            <p class="field-error" *ngIf="formulario.controls.nome.hasError('maxlength') && formulario.controls.nome.touched">O nome deve ter no máximo 120 caracteres.</p>
+          </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input matInput type="password" placeholder="Digite sua senha" formControlName="senha" autocomplete="new-password">
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="formulario.controls.senha.hasError('required')">Informe uma senha.</mat-error>
-          <mat-error *ngIf="formulario.controls.senha.hasError('minlength')">A senha deve ter pelo menos 8 caracteres.</mat-error>
-        </mat-form-field>
+          <div class="auth-field">
+            <label for="signup-email">E-mail</label>
+            <div class="auth-input-wrap" [class.invalid]="formulario.controls.email.invalid && formulario.controls.email.touched">
+              <mat-icon aria-hidden="true">mail_outline</mat-icon>
+              <input id="signup-email" type="email" placeholder="voce@email.com" formControlName="email" autocomplete="email">
+            </div>
+            <p class="field-error" *ngIf="formulario.controls.email.hasError('required') && formulario.controls.email.touched">Informe seu e-mail.</p>
+            <p class="field-error" *ngIf="formulario.controls.email.hasError('email') && formulario.controls.email.touched">Informe um e-mail válido.</p>
+          </div>
 
-        <p class="mensagem mensagem-sucesso" role="status" *ngIf="mensagem">{{ mensagem }}</p>
-        <p class="mensagem mensagem-erro" role="alert" *ngIf="erro">{{ erro }}</p>
+          <div class="auth-field">
+            <label for="signup-password">Senha</label>
+            <div class="auth-input-wrap" [class.invalid]="formulario.controls.senha.invalid && formulario.controls.senha.touched">
+              <mat-icon aria-hidden="true">lock_outline</mat-icon>
+              <input id="signup-password" type="password" placeholder="Crie uma senha" formControlName="senha" autocomplete="new-password">
+            </div>
+            <p class="field-error" *ngIf="formulario.controls.senha.hasError('required') && formulario.controls.senha.touched">Informe uma senha.</p>
+            <p class="field-error" *ngIf="formulario.controls.senha.hasError('minlength') && formulario.controls.senha.touched">A senha deve ter pelo menos 8 caracteres.</p>
+          </div>
 
-        <button mat-flat-button color="primary" type="submit" class="cadastro-button" [disabled]="carregando">
-          {{ carregando ? 'Criando conta...' : 'Criar minha conta' }}
-        </button>
-      </form>
-    </mat-card-content>
+          <p class="form-notice success" role="status" *ngIf="mensagem">{{ mensagem }}</p>
+          <p class="form-notice error" role="alert" *ngIf="erro">{{ erro }}</p>
 
-    <mat-card-footer>
-      <p>J&aacute; possui uma conta? <a routerLink="/login">Entrar</a></p>
-    </mat-card-footer>
-  </mat-card>
-</div>
+          <button class="auth-submit" type="submit" [disabled]="carregando">
+            {{ carregando ? 'Criando conta...' : 'Criar minha conta' }}
+          </button>
+        </form>
+
+        <p class="auth-footer">Já possui uma conta? <a routerLink="/login">Entrar</a></p>
+      </div>
+    </section>
+  </div>
+</main>

@@ -1,97 +1,11 @@
-.cadastro-container {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background-color: #f4f7fb;
-}
-
-.cadastro-card {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 420px;
-  padding: 28px;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(23, 43, 77, 0.08);
-}
-
-mat-card-header {
-  margin-bottom: 28px;
-}
-
-mat-card-title {
-  font-size: 26px;
-  font-weight: 700;
-  color: #172b4d;
-}
-
-mat-card-subtitle {
-  margin-top: 8px;
-  font-size: 14px;
-}
-
-mat-form-field {
+:host {
   display: block;
-  width: 100%;
-  margin-bottom: 10px;
 }
 
-form {
-  width: 100%;
+.signup-page .auth-heading {
+  margin-bottom: 30px;
 }
 
-.cadastro-button {
-  width: 100%;
-  height: 48px;
-  margin-top: 8px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-mat-card-footer {
-  padding: 0 16px;
-  text-align: center;
-}
-
-mat-card-footer p {
-  margin: 16px 0 4px;
-  color: #526174;
-  font-size: 14px;
-}
-
-mat-card-footer a {
-  color: #1976d2;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-mat-card-footer a:hover {
-  text-decoration: underline;
-}
-
-.mensagem {
-  margin: 0 0 12px;
-  font-size: 14px;
-}
-
-.mensagem-sucesso {
-  color: #237a3b;
-}
-
-.mensagem-erro {
-  color: #b3261e;
-}
-
-@media (max-width: 480px) {
-  .cadastro-container {
-    padding: 16px;
-  }
-
-  .cadastro-card {
-    padding: 20px 16px;
-  }
+.signup-page .auth-form {
+  gap: 17px;
 }

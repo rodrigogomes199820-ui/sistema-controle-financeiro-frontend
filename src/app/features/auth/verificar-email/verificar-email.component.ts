@@ -48,13 +48,11 @@ export class VerificarEmailComponent implements OnInit {
       .pipe(finalize(() => this.carregando = false))
       .subscribe({
         next: (resposta) => {
-          this.mensagem = resposta.mensagem || 'E-mail verificado com sucesso. Você já pode entrar.';
+          this.mensagem = resposta?.mensagem || 'E-mail verificado com sucesso. Você já pode entrar.';
           void this.router.navigate(['/login'], { queryParams: { email: this.formulario.controls.email.value } });
         },
         error: (erro) => {
-          this.erro = erro.status === 404
-            ? 'A confirmação de e-mail ainda não está disponível no servidor.'
-            : erro.error?.mensagem || 'Não foi possível verificar o e-mail. Confira o código e tente novamente.';
+          this.erro = this.authService.mensagemDeErro(erro, 'verificacao');
         }
       });
   }
@@ -72,12 +70,10 @@ export class VerificarEmailComponent implements OnInit {
       .pipe(finalize(() => this.reenviando = false))
       .subscribe({
         next: (resposta) => {
-          this.mensagem = resposta.mensagem || 'Se o e-mail estiver cadastrado, enviaremos um novo código.';
+          this.mensagem = resposta?.mensagem || 'Se o e-mail estiver cadastrado, enviaremos um novo código.';
         },
         error: (erro) => {
-          this.erro = erro.status === 404
-            ? 'O reenvio do código ainda não está disponível no servidor.'
-            : erro.error?.mensagem || 'Não foi possível reenviar o código. Tente novamente.';
+          this.erro = this.authService.mensagemDeErro(erro, 'reenvio');
         }
       });
   }

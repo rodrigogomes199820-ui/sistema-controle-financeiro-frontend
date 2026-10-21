@@ -40,13 +40,13 @@ export class CadastroComponent {
       .pipe(finalize(() => this.carregando = false))
       .subscribe({
         next: (resposta) => {
-          this.mensagem = resposta.mensagem || 'Cadastro realizado com sucesso.';
+          this.mensagem = resposta?.mensagem || 'Cadastro realizado com sucesso.';
           void this.router.navigate(['/verificar-email'], {
             queryParams: { email: this.formulario.controls.email.value }
           });
         },
         error: (erro) => {
-          this.erro = erro.error?.mensagem || 'Não foi possível realizar o cadastro.';
+          this.erro = this.authService.mensagemDeErro(erro, 'cadastro');
         }
       });
   }

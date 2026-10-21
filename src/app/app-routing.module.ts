@@ -6,6 +6,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
 import { VerificarEmailComponent } from './features/auth/verificar-email/verificar-email.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 {
@@ -14,7 +15,8 @@ component: HomeComponent
 },
 {
 path: 'layout',
-component: NavbarComponent
+component: NavbarComponent,
+canActivate: [authGuard]
 },
 {
 path: 'login',

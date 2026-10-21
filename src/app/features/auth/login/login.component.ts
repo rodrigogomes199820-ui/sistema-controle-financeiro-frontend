@@ -39,24 +39,21 @@ export class LoginComponent implements OnInit {
 
     this.carregando = true;
     this.erro = '';
+    this.authService.encerrarSessao();
 
     this.authService.login(this.formulario.getRawValue())
       .pipe(finalize(() => this.carregando = false))
       .subscribe({
         next: (resposta) => {
-          this.authService.definirUsuarioAtual(resposta.usuario);
+          if (!this.authService.definirUsuarioAtual(resposta?.usuario)) {
+            this.authService.encerrarSessao();
+            this.erro = 'A API respondeu sem um usuário válido. A sessão não foi iniciada.';
+            return;
+          }
           void this.router.navigate(['/layout']);
         },
         error: (erro) => {
-          if (erro.status === 404) {
-            this.erro = 'O login ainda nÃ£o estÃ¡ disponÃ­vel no servidor.';
-          } else if (erro.status === 401) {
-            this.erro = 'E-mail ou senha incorretos.';
-          } else if (erro.status === 0) {
-            this.erro = 'NÃ£o foi possÃ­vel conectar ao servidor. Tente novamente.';
-          } else {
-            this.erro = erro.error?.mensagem || 'NÃ£o foi possÃ­vel entrar. Tente novamente.';
-          }
+          this.erro = this.authService.mensagemDeErro(erro, 'login');
         }
       });
   }

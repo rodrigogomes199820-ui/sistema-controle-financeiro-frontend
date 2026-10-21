@@ -1,45 +1,57 @@
-<main class="login-container">
-  <mat-card class="login-card">
-    <div class="icone-login" aria-hidden="true">
-      <mat-icon>account_balance_wallet</mat-icon>
-    </div>
+<main class="auth-page login-page">
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a class="auth-brand" routerLink="/" aria-label="FinanceFlow - início">Rog<span>Fin</span></a>
+      <div class="auth-pitch">
+        <p class="auth-eyebrow">CONTROLE FINANCEIRO SIMPLES</p>
+        <h1>Seu dinheiro,<br>sob controle.</h1>
+        <p>Acompanhe receitas, despesas e metas em um só lugar.</p>
+      </div>
+      <img class="auth-illustration" src="assets/auth-wallet.svg" alt="">
+    </aside>
 
-    <mat-card-header>
-      <mat-card-title>Boas-vindas de volta</mat-card-title>
-      <mat-card-subtitle>Entre na sua conta para continuar.</mat-card-subtitle>
-    </mat-card-header>
+    <section class="auth-panel" aria-labelledby="login-title">
+      <div class="auth-content">
+        <header class="auth-heading">
+          <h2 id="login-title">Bem-vindo de volta</h2>
+          <p>Entre para continuar.</p>
+        </header>
 
-    <mat-card-content>
-      <form [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
-        <mat-form-field appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input matInput type="email" placeholder="seu@email.com" formControlName="email" autocomplete="email">
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="formulario.controls.email.hasError('required')">Informe seu e-mail.</mat-error>
-          <mat-error *ngIf="formulario.controls.email.hasError('email')">Informe um e-mail válido.</mat-error>
-        </mat-form-field>
+        <form class="auth-form" [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
+          <div class="auth-field">
+            <label for="login-email">E-mail</label>
+            <div class="auth-input-wrap" [class.invalid]="formulario.controls.email.invalid && formulario.controls.email.touched">
+              <mat-icon aria-hidden="true">mail_outline</mat-icon>
+              <input id="login-email" type="email" placeholder="voce@email.com" formControlName="email" autocomplete="email">
+            </div>
+            <p class="field-error" *ngIf="formulario.controls.email.hasError('required') && formulario.controls.email.touched">Informe seu e-mail.</p>
+            <p class="field-error" *ngIf="formulario.controls.email.hasError('email') && formulario.controls.email.touched">Informe um e-mail válido.</p>
+          </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input matInput [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua senha" formControlName="senha" autocomplete="current-password">
-          <button mat-icon-button matSuffix type="button" (click)="mostrarSenha = !mostrarSenha" [attr.aria-label]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
-            <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+          <div class="auth-field">
+            <div class="field-heading">
+              <label for="login-password">Senha</label>
+            </div>
+            <div class="auth-input-wrap" [class.invalid]="formulario.controls.senha.invalid && formulario.controls.senha.touched">
+              <mat-icon aria-hidden="true">lock_outline</mat-icon>
+              <input id="login-password" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua senha" formControlName="senha" autocomplete="current-password">
+              <button class="input-action" type="button" (click)="mostrarSenha = !mostrarSenha" [attr.aria-label]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
+                <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+            <p class="field-error" *ngIf="formulario.controls.senha.hasError('required') && formulario.controls.senha.touched">Informe sua senha.</p>
+          </div>
+
+          <p class="form-notice error" role="alert" *ngIf="erro">{{ erro }}</p>
+
+          <button class="auth-submit" type="submit" [disabled]="carregando">
+            {{ carregando ? 'Entrando...' : 'Entrar' }}
           </button>
-          <mat-error *ngIf="formulario.controls.senha.hasError('required')">Informe sua senha.</mat-error>
-        </mat-form-field>
+        </form>
 
-        <p class="mensagem mensagem-erro" role="alert" *ngIf="erro">{{ erro }}</p>
-
-        <button mat-flat-button color="primary" type="submit" class="login-button" [disabled]="carregando">
-          {{ carregando ? 'Entrando...' : 'Entrar' }}
-        </button>
-      </form>
-
-      <p class="link-verificacao"><a routerLink="/verificar-email">Precisa verificar seu e-mail?</a></p>
-    </mat-card-content>
-
-    <mat-card-footer>
-      <p>Ainda não tem uma conta? <a routerLink="/cadastro">Criar conta</a></p>
-    </mat-card-footer>
-  </mat-card>
+        <p class="auth-secondary-link"><a routerLink="/verificar-email">Precisa verificar seu e-mail?</a></p>
+        <p class="auth-footer">Ainda não tem conta? <a routerLink="/cadastro">Criar conta grátis</a></p>
+      </div>
+    </section>
+  </div>
 </main>

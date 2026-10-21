@@ -23,7 +23,7 @@ export class NavbarComponent   {
 
 
   sair(): void {
-  
+    this.authService.encerrarSessao();
     void this.router.navigate(['/login']);
   }
 
