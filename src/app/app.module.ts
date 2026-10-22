@@ -13,6 +13,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     SidebarComponent,
     HomeComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

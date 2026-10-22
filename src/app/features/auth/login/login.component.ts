@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
           localStorage.setItem('token', resposta.token);
 
-          void this.router.navigate(['/layout']);
+          void this.router.navigate(['/layout/dashboard']);
         },
         error: (erro) => {
           this.erro = this.authService.mensagemDeErro(

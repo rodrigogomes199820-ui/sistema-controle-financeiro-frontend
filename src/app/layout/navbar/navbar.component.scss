@@ -68,3 +68,20 @@
   }
 }
 
+
+.layout-content {
+  display: flex;
+  min-height: calc(100vh - 68px);
+  background: #f7f9fc;
+}
+
+.page-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: 680px) {
+  .layout-content {
+    flex-direction: column;
+  }
+}

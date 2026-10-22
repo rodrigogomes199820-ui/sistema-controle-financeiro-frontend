@@ -1,0 +1,74 @@
+<main class="dashboard">
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">VISÃO GERAL</p>
+      <h1>Olá, {{ nomeUsuario || 'seja bem-vindo' }} <span aria-hidden="true">👋</span></h1>
+      <p class="subtitle">Aqui está um resumo da sua vida financeira.</p>
+    </div>
+    <span class="period-chip">
+      <mat-icon aria-hidden="true">calendar_today</mat-icon>
+      Este mês
+    </span>
+  </header>
+
+  <section class="summary-grid" aria-label="Resumo financeiro">
+    <article class="summary-card balance-card">
+      <div class="card-topline">
+        <span class="card-icon balance-icon"><mat-icon>account_balance_wallet</mat-icon></span>
+        <span class="card-caption">Saldo total</span>
+      </div>
+      <p class="card-value">R$ <span>—</span></p>
+      <p class="card-helper">Seu saldo aparecerá aqui</p>
+    </article>
+
+    <article class="summary-card">
+      <div class="card-topline">
+        <span class="card-icon income-icon"><mat-icon>south_west</mat-icon></span>
+        <span class="card-caption">Receitas</span>
+      </div>
+      <p class="card-value">R$ <span>—</span></p>
+      <p class="card-helper">Total recebido no período</p>
+    </article>
+
+    <article class="summary-card">
+      <div class="card-topline">
+        <span class="card-icon expense-icon"><mat-icon>north_east</mat-icon></span>
+        <span class="card-caption">Despesas</span>
+      </div>
+      <p class="card-value">R$ <span>—</span></p>
+      <p class="card-helper">Total gasto no período</p>
+    </article>
+  </section>
+
+  <section class="details-grid" aria-label="Detalhes financeiros">
+    <article class="content-card transactions-card">
+      <div class="section-heading">
+        <div>
+          <h2>Movimentações recentes</h2>
+          <p>Entradas e saídas da sua conta</p>
+        </div>
+        <button type="button" class="text-button" disabled>Ver todas</button>
+      </div>
+      <div class="empty-state">
+        <span class="empty-icon"><mat-icon>receipt_long</mat-icon></span>
+        <strong>Nenhuma movimentação por enquanto</strong>
+        <span>Quando houver lançamentos, eles aparecerão aqui.</span>
+      </div>
+    </article>
+
+    <article class="content-card budget-card">
+      <div class="section-heading">
+        <div>
+          <h2>Seu orçamento</h2>
+          <p>Acompanhe seus limites mensais</p>
+        </div>
+        <span class="budget-icon"><mat-icon>pie_chart_outline</mat-icon></span>
+      </div>
+      <div class="budget-empty">
+        <div class="budget-ring"><mat-icon>pie_chart_outline</mat-icon></div>
+        <strong>Organize seus objetivos</strong>
+        <span>Seu resumo de orçamento será exibido aqui.</span>
+      </div>
+    </article>
+  </section>
+</main>
