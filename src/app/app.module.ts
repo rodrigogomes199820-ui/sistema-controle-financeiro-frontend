@@ -11,7 +11,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HomeComponent } from './features/landing/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
-import { VerificarEmailComponent } from './features/auth/verificar-email/verificar-email.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { VerificarEmailComponent } from './features/auth/verificar-email/verific
     NavbarComponent,
     HomeComponent,
     LoginComponent,
-    CadastroComponent,
-    VerificarEmailComponent
+    CadastroComponent
   ],
   imports: [
     BrowserModule,

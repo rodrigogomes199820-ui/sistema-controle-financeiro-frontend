@@ -11,7 +11,6 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class CadastroComponent {
   carregando = false;
-  mensagem = '';
   erro = '';
 
   formulario = this.fb.nonNullable.group({
@@ -33,16 +32,17 @@ export class CadastroComponent {
     }
 
     this.carregando = true;
-    this.mensagem = '';
     this.erro = '';
 
     this.authService.cadastrar(this.formulario.getRawValue())
       .pipe(finalize(() => this.carregando = false))
       .subscribe({
-        next: (resposta) => {
-          this.mensagem = resposta?.mensagem || 'Cadastro realizado com sucesso.';
-          void this.router.navigate(['/verificar-email'], {
-            queryParams: { email: this.formulario.controls.email.value }
+        next: () => {
+          void this.router.navigate(['/login'], {
+            queryParams: {
+              email: this.formulario.controls.email.value,
+              cadastro: 'sucesso'
+            }
           });
         },
         error: (erro) => {

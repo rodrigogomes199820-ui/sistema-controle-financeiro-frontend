@@ -17,6 +17,8 @@
           <p>Entre para continuar.</p>
         </header>
 
+        <p class="form-notice success" role="status" *ngIf="mensagem">{{ mensagem }}</p>
+
         <form class="auth-form" [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
           <div class="auth-field">
             <label for="login-email">E-mail</label>
@@ -48,8 +50,6 @@
             {{ carregando ? 'Entrando...' : 'Entrar' }}
           </button>
         </form>
-
-        <p class="auth-secondary-link"><a routerLink="/verificar-email">Precisa verificar seu e-mail?</a></p>
         <p class="auth-footer">Ainda não tem conta? <a routerLink="/cadastro">Criar conta grátis</a></p>
       </div>
     </section>

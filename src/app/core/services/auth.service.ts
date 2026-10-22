@@ -17,10 +17,6 @@ export interface LoginResponse {
   usuario?: unknown;
 }
 
-export interface VerificacaoEmailResponse {
-  mensagem?: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -59,15 +55,7 @@ export class AuthService {
     this.usuarioAtualSubject.next(null);
   }
 
-  verificarEmail(dados: { email: string; codigo: string }): Observable<VerificacaoEmailResponse> {
-    return this.post<VerificacaoEmailResponse>('/verify-email', dados);
-  }
-
-  reenviarCodigo(email: string): Observable<VerificacaoEmailResponse> {
-    return this.post<VerificacaoEmailResponse>('/resend-code', { email });
-  }
-
-  mensagemDeErro(error: unknown, operacao: 'cadastro' | 'login' | 'verificacao' | 'reenvio'): string {
+  mensagemDeErro(error: unknown, operacao: 'cadastro' | 'login'): string {
     if (error instanceof TimeoutError || this.temNome(error, 'TimeoutError')) {
       return `A API não respondeu em ${this.requestTimeoutMs / 1000} segundos. Tente novamente.`;
     }

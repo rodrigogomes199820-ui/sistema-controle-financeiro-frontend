@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LoginComponent implements OnInit {
   carregando = false;
   mostrarSenha = false;
+  mensagem = '';
   erro = '';
 
   formulario = this.fb.nonNullable.group({
@@ -29,6 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const email = this.route.snapshot.queryParamMap.get('email');
     if (email) this.formulario.controls.email.setValue(email);
+    if (this.route.snapshot.queryParamMap.get('cadastro') === 'sucesso') {
+      this.mensagem = 'Cadastro concluído. Entre com seu e-mail e senha.';
+    }
   }
 
   entrar(): void {
@@ -38,6 +42,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.carregando = true;
+    this.mensagem = '';
     this.erro = '';
     this.authService.encerrarSessao();
 

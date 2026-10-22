@@ -48,8 +48,6 @@
             <p class="field-error" *ngIf="formulario.controls.senha.hasError('required') && formulario.controls.senha.touched">Informe uma senha.</p>
             <p class="field-error" *ngIf="formulario.controls.senha.hasError('minlength') && formulario.controls.senha.touched">A senha deve ter pelo menos 8 caracteres.</p>
           </div>
-
-          <p class="form-notice success" role="status" *ngIf="mensagem">{{ mensagem }}</p>
           <p class="form-notice error" role="alert" *ngIf="erro">{{ erro }}</p>
 
           <button class="auth-submit" type="submit" [disabled]="carregando">

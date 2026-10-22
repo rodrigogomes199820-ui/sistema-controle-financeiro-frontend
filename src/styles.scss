@@ -221,19 +221,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .auth-submit:focus-visible,
-.text-button:focus-visible,
 .input-action:focus-visible,
 .auth-brand:focus-visible,
-.auth-footer a:focus-visible,
-.auth-secondary-link a:focus-visible {
+.auth-footer a:focus-visible {
   outline: 3px solid rgb(33 129 223 / 45%);
   outline-offset: 3px;
 }
 
 .auth-submit:disabled { cursor: wait; opacity: 0.72; }
 
-.auth-footer,
-.auth-secondary-link {
+.auth-footer {
   margin: 27px 0 0;
   color: #606060;
   font-size: 16px;
@@ -241,19 +238,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center;
 }
 
-.auth-footer a,
-.auth-secondary-link a,
-.text-button {
+.auth-footer a {
   color: #1976d2;
   font: inherit;
   font-weight: 650;
   text-decoration: none;
 }
 
-.auth-footer a:hover,
-.auth-secondary-link a:hover,
-.text-button:hover:not(:disabled) { text-decoration: underline; }
-.auth-secondary-link { margin-top: 18px; font-size: 14px; }
+.auth-footer a:hover { text-decoration: underline; }
 
 .form-notice {
   margin: -7px 0 0;
@@ -263,26 +255,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .form-notice.error { color: #b3261e; }
 .form-notice.success { color: #237a3b; }
-
-.resend-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 4px 7px;
-  margin-top: 22px;
-  color: #606060;
-  font-size: 14px;
-}
-
-.text-button {
-  padding: 3px 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.text-button:disabled { cursor: wait; opacity: 0.65; }
 
 @media (max-width: 1000px) {
   .auth-shell { grid-template-columns: 0.9fr 1.1fr; }
