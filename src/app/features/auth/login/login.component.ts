@@ -1,8 +1,11 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
+
 import { AuthService } from '../../../core/services/auth.service';
+import { LoginDados } from '../interfaces/login-dados.interface';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +32,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     const email = this.route.snapshot.queryParamMap.get('email');
-    if (email) this.formulario.controls.email.setValue(email);
-    if (this.route.snapshot.queryParamMap.get('cadastro') === 'sucesso') {
+
+    if (email) {
+      this.formulario.controls.email.setValue(email);
+    }
+
+    if (
+      this.route.snapshot.queryParamMap.get('cadastro') === 'sucesso'
+    ) {
       this.mensagem = 'Cadastro concluído. Entre com seu e-mail e senha.';
     }
   }
@@ -41,27 +50,35 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    const dados: LoginDados = this.formulario.getRawValue();
+
     this.carregando = true;
     this.mensagem = '';
     this.erro = '';
-    this.authService.encerrarSessao();
 
-    this.authService.login(this.formulario.getRawValue())
-      .pipe(finalize(() => this.carregando = false))
+    this.authService.login(dados)
+      .pipe(
+        finalize(() => {
+          this.carregando = false;
+        })
+      )
       .subscribe({
         next: (resposta) => {
-          if (!this.authService.definirUsuarioAtual(resposta?.usuario)) {
-            this.authService.encerrarSessao();
-            this.erro = 'A API respondeu sem um usuário válido. A sessão não foi iniciada.';
+          if (!resposta?.token || !resposta.usuario?.id) {
+            this.erro = 'A API não retornou um token e um usuário válidos.';
             return;
           }
+
+          localStorage.setItem('token', resposta.token);
+
           void this.router.navigate(['/layout']);
         },
         error: (erro) => {
-          this.erro = this.authService.mensagemDeErro(erro, 'login');
+          this.erro = this.authService.mensagemDeErro(
+            erro,
+            'login'
+          );
         }
       });
   }
 }
-
-

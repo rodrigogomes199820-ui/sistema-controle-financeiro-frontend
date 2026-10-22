@@ -1,8 +1,11 @@
+
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+
 import { AuthService } from '../../../core/services/auth.service';
+import { CadastroDados } from '../interfaces/cadastro-dados.interface';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,9 +17,30 @@ export class CadastroComponent {
   erro = '';
 
   formulario = this.fb.nonNullable.group({
-    nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(120)]],
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
-    senha: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(72)]]
+    nome: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(120)
+      ]
+    ],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(254)
+      ]
+    ],
+    senha: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(72)
+      ]
+    ]
   });
 
   constructor(
@@ -31,22 +55,31 @@ export class CadastroComponent {
       return;
     }
 
+    const dados: CadastroDados = this.formulario.getRawValue();
+
     this.carregando = true;
     this.erro = '';
 
-    this.authService.cadastrar(this.formulario.getRawValue())
-      .pipe(finalize(() => this.carregando = false))
+    this.authService.cadastrar(dados)
+      .pipe(
+        finalize(() => {
+          this.carregando = false;
+        })
+      )
       .subscribe({
         next: () => {
           void this.router.navigate(['/login'], {
             queryParams: {
-              email: this.formulario.controls.email.value,
+              email: dados.email,
               cadastro: 'sucesso'
             }
           });
         },
         error: (erro) => {
-          this.erro = this.authService.mensagemDeErro(erro, 'cadastro');
+          this.erro = this.authService.mensagemDeErro(
+            erro,
+            'cadastro'
+          );
         }
       });
   }

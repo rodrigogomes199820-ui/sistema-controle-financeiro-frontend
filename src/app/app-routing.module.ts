@@ -5,7 +5,7 @@ import { HomeComponent } from './features/landing/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import { authGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 {
@@ -15,7 +15,7 @@ component: HomeComponent
 {
 path: 'layout',
 component: NavbarComponent,
-canActivate: [authGuard]
+canActivate: [AuthGuard]
 },
 {
 path: 'login',

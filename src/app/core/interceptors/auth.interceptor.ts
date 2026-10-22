@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
@@ -6,25 +7,31 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private readonly apiOrigin = 'https://sistema-controle-financeiro-backend-dzg6.onrender.com/';
 
-  constructor(private authService: AuthService) {}
+  intercept(
+    req: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.authService.token;
-    const isApiRequest = request.url.startsWith(this.apiOrigin);
-    const isPublicAuthRequest = /\/api\/auth\/(login|register)(?:\?|$)/.test(request.url);
+    const token = localStorage.getItem('token');
 
-    if (!token || !isApiRequest || isPublicAuthRequest) {
-      return next.handle(request);
+    const isLoginOrRegister =
+      req.url.includes('/auth/login') ||
+      req.url.includes('/auth/register');
+
+    if (!token || isLoginOrRegister) {
+      return next.handle(req);
     }
 
-    return next.handle(request.clone({
-      setHeaders: { Authorization: `Bearer ${token}` }
-    }));
+    const requestWithToken = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return next.handle(requestWithToken);
   }
 }

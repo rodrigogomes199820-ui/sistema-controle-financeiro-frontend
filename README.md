@@ -1,27 +1,90 @@
-# Web
+# Sistema Financeiro — Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Aplicação frontend do Sistema Financeiro, desenvolvida com Angular e TypeScript. Responsável pela interface de usuário, autenticação e comunicação com a API do sistema.
 
-## Development server
+## Tecnologias
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular
+- TypeScript
+- Angular Material
+- SCSS
+- RxJS
+- Angular HttpClient
 
-## Code scaffolding
+## Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Cadastro de usuários.
+- Login e autenticação.
+- Consulta dos dados do usuário autenticado.
+- Navegação entre as áreas da aplicação.
+- Comunicação com o backend por meio de uma API REST.
 
-## Build
+> As funcionalidades de lançamentos financeiros poderão ser documentadas à medida que forem implementadas.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Arquitetura
 
-## Running unit tests
+O frontend utiliza serviços Angular para separar as chamadas HTTP da apresentação da interface.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **AuthService:** realiza as operações de cadastro e login e mantém o estado do usuário na aplicação.
+- **UsuariosService:** consulta os dados do usuário autenticado.
+- **AuthInterceptor:** adiciona o token de autenticação às requisições protegidas, conforme a configuração do projeto.
+- **AppRoutingModule:** organiza a navegação entre as páginas.
 
-## Running end-to-end tests
+## Requisitos
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Node.js e npm.
+- Backend configurado e em execução para utilizar os recursos que dependem da API.
 
-## Further help
+## Instalação
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Clone o repositório e entre na pasta do frontend:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd sistema-frontend/web
+npm install
+```
+
+## Configuração da API
+
+Configure a URL base do backend nos arquivos de ambiente do Angular.
+
+Desenvolvimento local:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000'
+};
+```
+
+Em produção, configure `apiUrl` com o endereço público da API. Não inclua tokens, senhas ou credenciais nesses arquivos.
+
+## Executar localmente
+
+```bash
+npm start
+```
+
+A aplicação normalmente estará disponível em `http://localhost:4200`.
+
+O backend deve estar em execução para que as requisições à API funcionem.
+
+## Build de produção
+
+```bash
+npx ng build --configuration production
+```
+
+Os arquivos compilados são gerados no diretório configurado em `angular.json`. Publique esses arquivos em um serviço de hospedagem compatível com aplicações frontend estáticas.
+
+## Segurança
+
+- Não armazene credenciais ou segredos no repositório.
+- Utilize HTTPS na comunicação com a API publicada.
+- Configure o backend para aceitar apenas as origens necessárias.
+- Trate tokens de autenticação como informações privadas.
+
+## Estado do projeto
+
+O frontend possui autenticação e integração com a API para consultar os dados do usuário autenticado. Outras funcionalidades serão incorporadas conforme a evolução do sistema.

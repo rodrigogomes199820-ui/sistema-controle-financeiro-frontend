@@ -6,8 +6,10 @@
 
   <span class="spacer"></span>
 
-  <ng-container *ngIf="authService.usuarioAtual$ | async as usuario">
-    <span class="user-greeting">Olá, {{ usuario.nome }}</span>
+  <ng-container *ngIf="nomeUsuario">
+    <span class="user-greeting">Olá, {{nomeUsuario}} 
+
+    </span>
   </ng-container>
 
   <button mat-icon-button type="button" class="notification-button" aria-label="Notificações">
