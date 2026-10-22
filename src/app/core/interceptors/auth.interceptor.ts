@@ -1,25 +1,37 @@
 
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
-  Router,
-  UrlTree
-} from '@angular/router';
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  intercept(
+    req: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
 
-  canActivate(): boolean | UrlTree {
     const token = localStorage.getItem('token');
 
-    if (token) {
-      return true;
+    const isLoginOrRegister =
+      req.url.includes('/auth/login') ||
+      req.url.includes('/auth/register');
+
+    if (!token || isLoginOrRegister) {
+      return next.handle(req);
     }
 
-    return this.router.createUrlTree(['/login']);
+    const requestWithToken = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return next.handle(requestWithToken);
   }
 }
