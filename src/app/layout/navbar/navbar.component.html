@@ -10,9 +10,14 @@
     <span class="user-greeting">Olá, {{ usuario.nome }}</span>
   </ng-container>
 
+  <button mat-icon-button type="button" class="notification-button" aria-label="Notificações">
+    <mat-icon aria-hidden="true">notifications_none</mat-icon>
+  </button>
+
   <button mat-button type="button" class="logout-button" (click)="sair()">
     <mat-icon>logout</mat-icon>
-    <span>Sair</span>
   </button>
 </mat-toolbar>
+
+<app-sidebar></app-sidebar>
 

@@ -23,11 +23,16 @@ export interface LoginResponse {
 export class AuthService {
   private readonly apiUrl = 'https://sistema-controle-financeiro-backend-dzg6.onrender.com/api/auth';
   private readonly requestTimeoutMs = 30_000;
-  private readonly usuarioAtualSubject = new BehaviorSubject<UsuarioAtual | null>(null);
+  private readonly usuarioAtualSubject = new BehaviorSubject<UsuarioAtual | null>(this.recuperarUsuario());
+  private tokenAtual: string | null = this.recuperarToken();
   readonly usuarioAtual$ = this.usuarioAtualSubject.asObservable();
 
   get usuarioAtual(): UsuarioAtual | null {
     return this.usuarioAtualSubject.value;
+  }
+
+  get token(): string | null {
+    return this.tokenAtual;
   }
 
   constructor(private http: HttpClient) {}
@@ -48,11 +53,23 @@ export class AuthService {
     if (!this.usuarioValido(usuario)) return false;
 
     this.usuarioAtualSubject.next(usuario);
+    this.salvarNaSessao('usuario_atual', usuario);
+    return true;
+  }
+
+  definirToken(token: unknown): boolean {
+    if (typeof token !== 'string' || !token.trim()) return false;
+
+    this.tokenAtual = token.trim();
+    this.salvarNaSessao('auth_token', this.tokenAtual);
     return true;
   }
 
   encerrarSessao(): void {
     this.usuarioAtualSubject.next(null);
+    this.tokenAtual = null;
+    this.removerDaSessao('usuario_atual');
+    this.removerDaSessao('auth_token');
   }
 
   mensagemDeErro(error: unknown, operacao: 'cadastro' | 'login'): string {
@@ -110,6 +127,47 @@ export class AuthService {
     return typeof usuario.id === 'string' && usuario.id.trim().length > 0
       && typeof usuario.nome === 'string' && usuario.nome.trim().length > 0
       && typeof usuario.email === 'string' && usuario.email.trim().length > 0;
+  }
+
+  private recuperarUsuario(): UsuarioAtual | null {
+    const salvo = this.lerDaSessao('usuario_atual');
+    if (this.usuarioValido(salvo)) return salvo;
+
+    this.removerDaSessao('usuario_atual');
+    return null;
+  }
+
+  private recuperarToken(): string | null {
+    const salvo = this.lerDaSessao('auth_token');
+    return typeof salvo === 'string' && salvo.trim() ? salvo.trim() : null;
+  }
+
+  private lerDaSessao(chave: string): unknown {
+    try {
+      if (typeof sessionStorage === 'undefined') return null;
+      const valor = sessionStorage.getItem(chave);
+      return valor ? JSON.parse(valor) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  private salvarNaSessao(chave: string, valor: unknown): void {
+    try {
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem(chave, JSON.stringify(valor));
+      }
+    } catch {
+      // A sessão continua disponível em memória se o navegador bloquear o armazenamento.
+    }
+  }
+
+  private removerDaSessao(chave: string): void {
+    try {
+      if (typeof sessionStorage !== 'undefined') sessionStorage.removeItem(chave);
+    } catch {
+      // Ignora falhas de armazenamento; a sessão em memória também é encerrada.
+    }
   }
 
   private extrairMensagemApi(error: unknown): string | null {

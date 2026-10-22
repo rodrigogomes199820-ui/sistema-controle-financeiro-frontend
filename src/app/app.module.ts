@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material/material.module';
 
@@ -11,11 +11,14 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HomeComponent } from './features/landing/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    SidebarComponent,
     HomeComponent,
     LoginComponent,
     CadastroComponent
@@ -28,7 +31,9 @@ import { CadastroComponent } from './features/auth/cadastro/cadastro.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

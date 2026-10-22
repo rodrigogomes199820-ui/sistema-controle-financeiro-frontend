@@ -1,6 +1,6 @@
 ﻿.navbar {
   min-height: 68px;
-  padding: 0 clamp(16px, 4vw, 48px);
+  padding: 0 16px 0 clamp(16px, 4vw, 48px);
   background: #fff;
   box-shadow: 0 2px 12px rgba(24, 35, 59, 0.08);
 }
@@ -27,19 +27,44 @@
 .logout-button {
   display: inline-flex;
   align-items: center;
+  justify-content: end;
   gap: 6px;
-  color: #35415a;
+  color: #c62828;
+}
+
+.logout-button:hover {
+  color: #a61b1b;
 }
 
 .user-greeting {
+  min-width: 0;
+  max-width: 35vw;
+  overflow: hidden;
   margin-right: 12px;
   color: #59657a;
   font-size: 0.95rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notification-button {
+  margin-right: 8px;
+  color: #59657a;
+}
+
+.notification-button:hover {
+  color: #4568d4;
 }
 
 @media (max-width: 480px) {
   .user-greeting {
-    display: none;
+    max-width: 32vw;
+    margin-right: 6px;
+    font-size: 0.8rem;
+  }
+
+  .notification-button {
+    margin-right: 2px;
   }
 }
 

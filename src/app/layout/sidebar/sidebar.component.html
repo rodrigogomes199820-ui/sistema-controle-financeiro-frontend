@@ -1,0 +1,50 @@
+﻿<aside class="sidebar" [class.collapsed]="recolhido" aria-label="Navegação lateral">
+  <div
+    class="sidebar-content"
+    [attr.aria-hidden]="recolhido"
+    [attr.inert]="recolhido ? '' : null">
+    <div class="sidebar-section">
+      <div class="sidebar-nav">
+        <a class="sidebar-link" routerLink="/layout" aria-current="page">
+          <mat-icon aria-hidden="true">home</mat-icon>
+          <span>Início</span>
+        </a>
+        <span class="sidebar-link unavailable" aria-disabled="true">
+          <mat-icon aria-hidden="true">receipt_long</mat-icon>
+          <span>Lançamentos</span>
+        </span>
+        <span class="sidebar-link unavailable" aria-disabled="true">
+          <mat-icon aria-hidden="true">category</mat-icon>
+          <span>Categorias</span>
+        </span>
+        <span class="sidebar-link unavailable" aria-disabled="true">
+          <mat-icon aria-hidden="true">flag</mat-icon>
+          <span>Metas</span>
+        </span>
+        <span class="sidebar-link unavailable" aria-disabled="true">
+          <mat-icon aria-hidden="true">bar_chart</mat-icon>
+          <span>Relatórios</span>
+        </span>
+      </div>
+    </div>
+
+    <span class="sidebar-link unavailable" aria-disabled="true">
+      <mat-icon aria-hidden="true">settings</mat-icon>
+      <span>Configurações</span>
+    </span>
+
+    <div class="sidebar-note">
+      <mat-icon aria-hidden="true">tips_and_updates</mat-icon>
+      <p>Organize suas finanças e acompanhe suas decisões em um só lugar.</p>
+    </div>
+  </div>
+
+  <button
+    class="sidebar-toggle"
+    type="button"
+    [attr.aria-expanded]="!recolhido"
+    [attr.aria-label]="recolhido ? 'Abrir menu lateral' : 'Fechar menu lateral'"
+    (click)="alternar()">
+    <mat-icon aria-hidden="true">{{ recolhido ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+  </button>
+</aside>
