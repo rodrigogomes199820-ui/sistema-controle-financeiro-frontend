@@ -1,21 +1,19 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   recolhido = false;
-  mobile = false;
 
-  ngOnInit(): void {
-    this.atualizarLayoutResponsivo();
-  }
+  @Input() mobileMode = false;
+  @Input() mobileExpanded = false;
+  @Output() navigationSelected = new EventEmitter<void>();
 
-  @HostListener('window:resize')
-  aoRedimensionar(): void {
-    this.atualizarLayoutResponsivo();
+  get menuRecolhido(): boolean {
+    return this.mobileMode ? !this.mobileExpanded : this.recolhido;
   }
 
   alternar(): void {
@@ -23,17 +21,8 @@ export class SidebarComponent implements OnInit {
   }
 
   fecharAposNavegacao(): void {
-    if (this.mobile) {
-      this.recolhido = true;
-    }
-  }
-
-  private atualizarLayoutResponsivo(): void {
-    const mobile = window.matchMedia('(max-width: 680px)').matches;
-
-    if (mobile !== this.mobile) {
-      this.mobile = mobile;
-      this.recolhido = mobile;
+    if (this.mobileMode) {
+      this.navigationSelected.emit();
     }
   }
 }

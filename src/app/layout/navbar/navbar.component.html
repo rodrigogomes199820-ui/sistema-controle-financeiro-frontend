@@ -1,4 +1,15 @@
 ﻿<mat-toolbar class="navbar">
+  <button
+    *ngIf="mobileMode"
+    class="menu-toggle"
+    mat-icon-button
+    type="button"
+    [attr.aria-expanded]="mobileMenuOpen"
+    [attr.aria-label]="mobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'"
+    (click)="alternarMenuMobile()">
+    <mat-icon aria-hidden="true">{{ mobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
+
   <a class="brand" routerLink="/layout/dashboard" aria-label="FinanceFlow - início">
     <mat-icon class="brand-icon">account_balance_wallet</mat-icon>
     <span>Rog<span class="brand-highlight">Fin</span></span>
@@ -7,9 +18,7 @@
   <span class="spacer"></span>
 
   <ng-container *ngIf="nomeUsuario">
-    <span class="user-greeting">Olá, {{nomeUsuario}} 
-
-    </span>
+    <span class="user-greeting">Olá, {{nomeUsuario}}</span>
   </ng-container>
 
   <button mat-icon-button type="button" class="notification-button" aria-label="Notificações">
@@ -21,10 +30,20 @@
   </button>
 </mat-toolbar>
 
-<div class="layout-content">
-  <app-sidebar></app-sidebar>
+<div class="layout-content" [class.mobile-menu-open]="mobileMode && mobileMenuOpen">
+  <app-sidebar
+    [mobileMode]="mobileMode"
+    [mobileExpanded]="mobileMenuOpen"
+    (navigationSelected)="fecharMenuMobile()">
+  </app-sidebar>
+  <button
+    *ngIf="mobileMode && mobileMenuOpen"
+    class="mobile-menu-backdrop"
+    type="button"
+    aria-label="Fechar menu de navegação"
+    (click)="fecharMenuMobile()">
+  </button>
   <main class="page-content">
     <router-outlet></router-outlet>
   </main>
 </div>
-

@@ -27,7 +27,7 @@
 .logout-button {
   display: inline-flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 6px;
   color: #c62828;
 }
@@ -70,6 +70,7 @@
 
 
 .layout-content {
+  position: relative;
   display: flex;
   min-height: calc(100vh - 68px);
   background: #f7f9fc;
@@ -84,10 +85,37 @@
   .layout-content {
     flex-direction: column;
   }
+
+  .menu-toggle {
+    margin: 0 8px 0 -8px;
+  }
+
+  .mobile-menu-backdrop {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(24, 35, 59, 0.24);
+    cursor: pointer;
+  }
 }
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+.menu-toggle {
+  display: none;
+  color: #4568d4;
+}
+
+@media (max-width: 680px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
 }

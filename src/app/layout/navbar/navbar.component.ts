@@ -1,5 +1,4 @@
-﻿
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../core/services/usuarios.service';
 
@@ -9,8 +8,9 @@ import { UsuariosService } from '../../core/services/usuarios.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  nomeUsuario: string = '';
+  nomeUsuario = '';
+  mobileMode = false;
+  mobileMenuOpen = false;
 
   constructor(
     private router: Router,
@@ -19,6 +19,20 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
+    this.atualizarLayoutResponsivo();
+  }
+
+  @HostListener('window:resize')
+  aoRedimensionar(): void {
+    this.atualizarLayoutResponsivo();
+  }
+
+  alternarMenuMobile(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  fecharMenuMobile(): void {
+    this.mobileMenuOpen = false;
   }
 
   loadUser(): void {
@@ -35,5 +49,12 @@ export class NavbarComponent implements OnInit {
   sair(): void {
     void this.router.navigate(['/login']);
   }
-}
 
+  private atualizarLayoutResponsivo(): void {
+    const mobile = window.matchMedia('(max-width: 680px)').matches;
+    if (mobile !== this.mobileMode) {
+      this.mobileMode = mobile;
+      this.mobileMenuOpen = false;
+    }
+  }
+}

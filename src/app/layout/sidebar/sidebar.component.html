@@ -1,8 +1,8 @@
-﻿<aside class="sidebar" [class.collapsed]="recolhido" aria-label="Navegação lateral">
+﻿<aside class="sidebar" [class.collapsed]="menuRecolhido" aria-label="Navegação lateral">
   <div
     class="sidebar-content"
-    [attr.aria-hidden]="recolhido"
-    [attr.inert]="recolhido ? '' : null">
+    [attr.aria-hidden]="menuRecolhido"
+    [attr.inert]="menuRecolhido ? '' : null">
     <nav class="sidebar-nav" aria-label="Menu principal">
       <a class="sidebar-link" routerLink="/layout/dashboard" aria-current="page" (click)="fecharAposNavegacao()">
         <mat-icon aria-hidden="true">home</mat-icon>
@@ -37,12 +37,12 @@
   </div>
 
   <button
+    *ngIf="!mobileMode"
     class="sidebar-toggle"
     type="button"
-    [attr.aria-expanded]="!recolhido"
-    [attr.aria-label]="recolhido ? 'Abrir menu lateral' : 'Fechar menu lateral'"
+    [attr.aria-expanded]="!menuRecolhido"
+    [attr.aria-label]="menuRecolhido ? 'Abrir menu lateral' : 'Fechar menu lateral'"
     (click)="alternar()">
-    <span class="toggle-label">Menu</span>
-    <mat-icon aria-hidden="true">{{ mobile ? (recolhido ? 'menu' : 'close') : (recolhido ? 'chevron_right' : 'chevron_left') }}</mat-icon>
+    <mat-icon aria-hidden="true">{{ recolhido ? 'chevron_right' : 'chevron_left' }}</mat-icon>
   </button>
 </aside>
