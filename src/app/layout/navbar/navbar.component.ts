@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadUser();
     this.atualizarLayoutResponsivo();
   }
 
@@ -35,16 +34,7 @@ export class NavbarComponent implements OnInit {
     this.mobileMenuOpen = false;
   }
 
-  loadUser(): void {
-    this.usuariosService.buscarUsuarioAtual().subscribe({
-      next: (result) => {
-        this.nomeUsuario = result.usuario.nome;
-      },
-      error: (erro) => {
-        console.error('Erro ao buscar usuário:', erro);
-      }
-    });
-  }
+ 
 
   sair(): void {
     void this.router.navigate(['/login']);
