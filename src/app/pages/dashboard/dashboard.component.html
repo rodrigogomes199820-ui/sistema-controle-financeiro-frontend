@@ -2,7 +2,7 @@
   <header class="dashboard-header">
     <div>
       <p class="eyebrow">VISÃO GERAL</p>
-      <h1>Olá, {{ nomeUsuario || 'seja bem-vindo' }} <span aria-hidden="true">👋</span></h1>
+      <h1>Olá, {{ nomeUsuario || '' }} <span aria-hidden="true">👋</span></h1>
       <p class="subtitle">Aqui está um resumo da sua vida financeira.</p>
     </div>
     <span class="period-chip">
@@ -17,8 +17,8 @@
         <span class="card-icon balance-icon"><mat-icon>account_balance_wallet</mat-icon></span>
         <span class="card-caption">Saldo total</span>
       </div>
-      <p class="card-value">R$ <span>—</span></p>
-      <p class="card-helper">Seu saldo aparecerá aqui</p>
+      <p class="card-value"><span>{{ meuSaldo | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span></p>
+      <p class="card-helper">Meu saldo</p>
     </article>
 
     <article class="summary-card">
@@ -26,7 +26,7 @@
         <span class="card-icon income-icon"><mat-icon>south_west</mat-icon></span>
         <span class="card-caption">Receitas</span>
       </div>
-      <p class="card-value">R$ <span>—</span></p>
+      <p class="card-value">R$ <span>{{ meuSaldo | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span></p>
       <p class="card-helper">Total recebido no período</p>
     </article>
 

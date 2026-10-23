@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
@@ -23,6 +24,7 @@ MatCardModule,
 MatFormFieldModule,
 MatInputModule,
 MatDividerModule,
+MatSnackBarModule,
 MatTabsModule
 ],
 exports: [
@@ -34,6 +36,7 @@ MatCardModule,
 MatFormFieldModule,
 MatInputModule,
 MatDividerModule,
+MatSnackBarModule,
 MatTabsModule
 ]
 })

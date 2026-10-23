@@ -1,0 +1,80 @@
+
+<div class="container">
+  <div class="section-options">
+    <button
+      type="button"
+      class="option-button"
+      [class.active]="abaSelecionada === 'salario'"
+      (click)="abaSelecionada = 'salario'"
+    >
+      <span>Salário</span>
+    </button>
+
+    <button
+      type="button"
+      class="option-button"
+      [class.active]="abaSelecionada === 'editar'"
+      (click)="abaSelecionada = 'editar'"
+    >
+      <span>Editar salário</span>
+    </button>
+  </div>
+
+  <!-- Cadastro de salário -->
+  <div *ngIf="abaSelecionada === 'salario'">
+    <div class="header">
+      <h1>Adicionar Salário</h1>
+      <p>Cadastre um salário recorrente mensal</p>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="saveSalario()">
+      <div class="form-group">
+        <label for="valor">Valor mensal</label>
+        <input
+          id="valor"
+          type="text"
+          inputmode="decimal"
+          formControlName="valor"
+          placeholder="Ex.: 2.200,00"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="diaRecebimento">Dia do recebimento</label>
+        <input
+          id="diaRecebimento"
+          type="number"
+          formControlName="diaRecebimento"
+          placeholder="Informe o dia"
+          min="1"
+          max="31"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="mesInicio">Mês de início</label>
+        <input
+          id="mesInicio"
+          type="month"
+          formControlName="mesInicio"
+        />
+      </div>
+
+      <button type="submit" [disabled]="formulario.invalid">
+        Salvar salário
+      </button>
+    </form>
+  </div>
+
+  <!-- Edição de salário -->
+  <div *ngIf="abaSelecionada === 'editar'">
+    <div class="header">
+      <h1>Editar salário</h1>
+      <p>Altere os dados do seu salário recorrente</p>
+    </div>
+
+    <p class="empty-message">
+      A área de edição será configurada aqui.
+    </p>
+  </div>
+</div>
